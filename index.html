@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto JS Coder</title>
+
+  <!--FONTAWSOME-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <!---------------------------- C S S - C U S T O M ------------>
+  <link rel="stylesheet" href="style.css">
+
+
+  <!--BOOTSTRAP 4.6 CSS-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+
+  <!--google Font-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light m-0 px-2 py-0" >
+    
+
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Ropa</a>
+
+            <a class="nav-item nav-link" href="#">Accesorios</a>
+
+            <a class="nav-item nav-link" href="#">Discos</a>
+        </div>
+      </div>
+
+
+
+      <div class="container-fluid">
+        <a class="navbar-brand mx-auto pl-5" href="index.html">
+          <img src="imagenes/logoW.png" alt="logo Zeppelin" width="47%">
+        </a>
+
+        <p class="agregado display-6 alert alert-primary font-weight-bolder" role="alert">Agregado al Carrito</p>
+        
+        <!-- Button trigger modal -->
+        <a data-toggle="modal" data-target="#exampleModal" type="button" id="test">
+          
+          <i class="fas fa-shopping-cart fa-2x"></i>
+        </a>
+      </div>
+
+    
+  </nav>
+
+
+
+  <div id="imgPromo" class="container-fluid m-auto">
+    <div class="imgBook">
+      <img class="imgBook__image" src="imagenes/lzbook.jpg" alt="Libro led Zeppelin" width="80%" height="80%">
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+      <div class="modal-content">
+
+
+        <div class="modal-header bg-gradient">
+          <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+
+
+          <table id="carroCompras" class="table table-sm table-striped table-bordered table-hover table-light">
+            
+            <thead class="thead-dark">
+            
+              <tr>
+            
+                <th scope="col">#</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Talle</th>
+            
+                <th scope="col">Remover</th>
+            
+              </tr>
+            </thead>
+
+            <tbody id="carroCuerpo">
+            </tbody>
+            
+            <tr>
+            
+              <th scope="col"></th>
+              <th scope="col">TOTAL</th>
+              <th scope="col"></th>
+              <th scope="col" id="totalCarro"></th>
+              
+            </tr>
+          </table>
+
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark btn-finalizar" data-dismiss="modal">Comprar</button>
+          <button type="button" class="btn btn-primary btn-vaciar">Vaciar carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="container-fluid bg-light h-25 w-100">
+
+    <h1 class="display my-3">
+      Tienda Oficial
+    </h1>
+
+  </div>
+
+  <div class="container-fluid">
+
+    <div id="contenCard" class="row row-cols-2 row-cols-md-4 g-4"></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!--BOOTSTRAP 4.6 JS-->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+  </script>
+
+  <!--<script src="js/jquery-3.6.0.min.js" defer></script>-->
+  <script src="js/data.js" defer></script>
+  <script src="js/class.js" defer></script>
+  <script src="js/functions.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+
+</html>

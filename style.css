@@ -1,0 +1,58 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body {
+    background-image: url("imagenes/led.jpg");
+}
+header {
+    background-image: url("/Proyecto/imagenes/logo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30%;
+    height: 5vh;
+}
+h1 {
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+table {
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.badge-pill {
+    z-index: 1;
+    position: absolute;
+    top: 15%;
+    right: 2%;
+}
+#imgPromo {
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    bottom: 10%;
+    left: 10%;
+    /*display: none;*/
+}
+
+.agregado {
+    position: absolute!important;
+    top: 10%;
+    right: 6%;
+    display: none;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+.masMenos {
+
+    font-weight: 400;
+}
+
+.masMenos, .btn-remove:hover {
+
+    cursor: pointer;
+}
