@@ -16,8 +16,6 @@ const PREFIJO = "productoId"
 
 let CARRITO = new CART;
 
-let precioTotal = 0;
-
 
 //------------------------- ARRAYS DE PRODUCTOS PARA AGREGAR PRODUCTO NUEVO AL HTML ------------------------------------
 
@@ -42,41 +40,9 @@ arrayProductos.forEach(producto => {
 
 
 
-/*
-$(".btn-producto").click(function agregarAlCarro(){
-    CARRITO.agregarAlCarrito()
-})
-*/
-$(".btn-producto").click(CARRITO.agregarAlCarrito)
-/*
-function agregarAlCarrito(evento){
 
-    //console.log(evento.target.name);
-    let detalleProd = arrayProductos.find(objeto  => objeto.id == evento.target.name);
-    //console.log(detalleProd);
-    console.log(`Agregaste ${detalleProd.tipo} al CARRITO`);
+$(".btn-producto").click(e => CARRITO.agregarAlCarrito(e))
 
-    //---SUMO PRECIO DE LOS PRODUCTOS
-    let precioAgregado = precioTotal += detalleProd.precio;
-    console.log(`Total: $ ${precioAgregado}.`);
-    console.log(precioAgregado);
-
-    CARRITO.agregarItem(detalleProd)
-
-    CARRITO.salida();
-
-
-    //----- ANIMACION DE AGREGADO AL CARRITO
-    $(".agregado").show()
-    $(".agregado").fadeIn(1000, function(){
-        $(".agregado").fadeOut(3000);
-    });
-
-
-    badgeCarro (CARRITO.cart.length)
-
-}
-*/
 
 
 
@@ -106,8 +72,9 @@ function getBadge(stock) {
 
 
 function badgeCarro (unidad) {
+    $("#badgeCart").remove();
     if (unidad > 0) {
-        return $("#test").append(`<span class="badge badge-pill badge-danger">${unidad}</span>`);
+        $("#test").append(`<span id="badgeCart" class="badge badge-pill badge-danger">${unidad}</span>`);
     }
     
 }

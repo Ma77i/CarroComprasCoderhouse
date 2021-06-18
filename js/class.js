@@ -21,7 +21,6 @@ class Producto {
         this.stock = stock
         this.vendido = false;
         this.iva = 0.21;
-        this.cantidad = 1
     }
 
     //CREO METODOS PARA 
@@ -72,49 +71,36 @@ class Producto {
 class CART {
     constructor(){
     this.cart = [];
-    }
-
-
-//--------------------------------------------------------------------------- A G R E G A R - I T E M - A L - A R R A Y - C A R R I T O --------
-    agregarItem(item) {
-        console.log(item);
-        !this.cart.find(i => i.id == item.id) && this.cart.push(item);
-        this.agregarCantidad(item);
+    this.total = this.getTotal()
     }
 
 //------------------------------------------------------------------------ M E T O D O - A G R E G A R - A L - C A R R I T O -----------------
     
-    agregarAlCarrito(evento){
-
-        let detalleProd = arrayProductos.find(objeto  => objeto.id == evento.target.name);
-        console.log(`Agregaste ${detalleProd.tipo} al CARRITO`);
-    
-        //this.agregarItem(detalleProd)
-    
-        this.salida();
-    
+    agregarAlCarrito(e){
+        e.preventDefault();
+        var detalleProd = arrayProductos.find(objeto  => objeto.id == e.target.name);
+        //console.log(`Agregaste ${detalleProd.tipo} al CARRITO`);
+        !this.cart.find(i => i.id == detalleProd.id) && this.cart.push({...detalleProd, cantidad: 0});
+        this.agregarCantidad(detalleProd.id);
     
         //----- ANIMACION DE AGREGADO AL CARRITO
         $(".agregado").show()
         $(".agregado").fadeIn(1000, function(){
             $(".agregado").fadeOut(3000);
         });
-    
-    
+        
         badgeCarro (this.cart.length)
     
     }
 
 
-
+//--------------------------------------------------------------------------- A G R E G A R - I T E M - A L - A R R A Y - C A R R I T O --------
 
 //----------------------------------------------------------------------- A G R E G A R - O - R E S T A R - C A N T I D A D -------------------
-    agregarCantidad(item, q = 1) {
-
-        let index = this.cart.findIndex(i => i.id == item.id)
+    agregarCantidad(id, q = 1) {
         
+        let index = this.cart.findIndex(i => i.id == id)
         this.cart[index].cantidad += q;
-        console.log(this.cart[index].cantidad += q);
         this.cart[index].cantidad = this.cart[index].cantidad <= 0 ? 0 : this.cart[index].cantidad > this.cart[index].stock ? this.cart[index].stock : this.cart[index].cantidad;
         
         this.cart[index].cantidad <= 0 && this.removerElemento(this.cart[index].id);
@@ -125,11 +111,10 @@ class CART {
 
 //----------------------------------------------------------------------------------------- V A C I A R - C A R R I T O ---------------------------
     vaciarCart() {
-        this.cart = []
+        this.cart.length = 0
         localStorage.removeItem("carrito");
-        localStorage.removeItem("total");
         $("#carroCuerpo, #totalCarro").empty();
-        badgeCarro (CARRITO.cart.length)
+        badgeCarro (this.cart.length)
     }
 
 
@@ -138,30 +123,33 @@ class CART {
     removerElemento(id) {
     
         this.cart = this.cart.filter(item => item.id != id);
-        
-        badgeCarro (CARRITO.cart.length)
+        console.log(this.cart.length);
+        this.cart.length == 0 && this.vaciarCart()
+        badgeCarro (this.cart.length)
         this.salida();
     }
 
-
+    getTotal(){
+        this.total = this.cart.reduce((p, i) => i.cantidad * i.precio + p, 0)
+        return this.total
+    }
 
 //--------------------------------------------------------------------------------- S A L I D A - C A R R I T O --------------------------- 
     salida(){
 
-    let totalSalida = 0
+    let totalSalida = this.getTotal()
 
     $("#carroCuerpo").empty();
     
     for (const produ of this.cart) {
 
-        totalSalida += produ.precio * produ.cantidad
 
         $("#carroCuerpo").append(`<tr class="celda">
                                     <td>${produ.tipo}</td>
                                     <td>
                                         <span class="masMenos" onclick="CARRITO.agregarCantidad(${produ.id}, -1)"> - </span>
                                             ${produ.cantidad} 
-                                        <span class="masMenos" onclick="CARRITO.agregarCantidad(${produ.id})"> + </span>
+                                        <span class="masMenos" onclick="CARRITO.agregarCantidad(${produ.id}, 1)"> + </span>
                                     </td>
                                     <td>$ ${produ.precio}</td>
                                     <td>${produ.talle}</td>
@@ -176,18 +164,17 @@ class CART {
     $("#totalCarro").html(`$ ${totalSalida}`);
 
     saveJsonToLocal("carrito", this.cart)
-    saveJsonToLocal("total", totalSalida)
     }
 
 
 
 //------------------------------------------------------------------------ F I N A L I Z A R - C O M P R A ------------------------------
     finalizarCompra() {
-        $.post("https://jsonplaceholder.typicode.com/posts",JSON.stringify(CARRITO.cart));
+        $.post("https://jsonplaceholder.typicode.com/posts",JSON.stringify(this.cart));
     
-        CARRITO.vaciarCart()
+        this.vaciarCart()
         
-        badgeCarro (CARRITO.cart.length)
+        badgeCarro (this.cart.length)
         $("#carroCuerpo, #totalCarro").empty();
     }
 }

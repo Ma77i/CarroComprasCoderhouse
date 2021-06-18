@@ -10,27 +10,6 @@ $(document).ready(function () {
     });
 
 
-    /*
-    $("#test").hover(function() {
-        //console.log("lee el hover? Si");
-        $('#exampleModal').modal("show");
-    }, function() {
-        console.log("lee hover out? Si");
-        $("#exampleModal").modal("hide");
-    }
-    );
-
-
-    $("#test").hover(function () {
-        
-        $("#exampleModal").modal("hide");
-        
-    })
-*/
-    
-
-
-
 
 // -----------------------------------  DETECTO EVENTOS ------------------------------------------------------------
 

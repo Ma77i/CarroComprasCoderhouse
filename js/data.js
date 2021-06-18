@@ -5,7 +5,6 @@ const DATOS = [{
     "precio": 855,
     "imagen": "imagenes/remeraBlanca.jpg",
     "stock": 6,
-    "cantidad": 1
 }, {
     "id": 2,
     "tipo": "Remera Negra",
@@ -13,7 +12,6 @@ const DATOS = [{
     "precio": 971,
     "imagen": "imagenes/remeraNegra.jpg",
     "stock": 5,
-    "cantidad": 1
 }, {
     "id": 3,
     "tipo": "Remera Roja",
@@ -21,7 +19,6 @@ const DATOS = [{
     "precio": 953,
     "imagen": "imagenes/remeraRoja.jpg",
     "stock": 3,
-    "cantidad": 1
 }, {
     "id": 4,
     "tipo": "Canguro Rojo",
@@ -29,7 +26,6 @@ const DATOS = [{
     "precio": 767,
     "imagen": "imagenes/canguroRojo.jpg",
     "stock": 5,
-    "cantidad": 1
 }, {
     "id": 5,
     "tipo": "Canguro Negro",
@@ -37,7 +33,6 @@ const DATOS = [{
     "precio": 811,
     "imagen": "imagenes/canguroNegro.jpg",
     "stock": 3,
-    "cantidad": 1
 }, {
     "id": 6,
     "tipo": "Canguro Azul",
@@ -45,7 +40,6 @@ const DATOS = [{
     "precio": 843,
     "imagen": "imagenes/canguroAzul.jpg",
     "stock": 5,
-    "cantidad": 1
 }, {
     "id": 7,
     "tipo": "Gorro Blanco",
@@ -53,7 +47,6 @@ const DATOS = [{
     "precio": 720,
     "imagen": "imagenes/gorroBlanco.jpg",
     "stock": 4,
-    "cantidad": 1
 }, {
     "id": 8,
     "tipo": "Gorro Negro",
@@ -61,7 +54,6 @@ const DATOS = [{
     "precio": 943,
     "imagen": "imagenes/gorroNegro.jpg",
     "stock": 0,
-    "cantidad": 1
 }, {
     "id": 9,
     "tipo": "Gorra Negra",
@@ -69,7 +61,6 @@ const DATOS = [{
     "precio": 531,
     "imagen": "imagenes/gorraNegra.jpg",
     "stock": 4,
-    "cantidad": 1
 }, {
     "id": 10,
     "tipo": "Gorra Gris",
@@ -77,7 +68,6 @@ const DATOS = [{
     "precio": 840,
     "imagen": "imagenes/gorraGris.jpg",
     "stock": 0,
-    "cantidad": 1
 }, ]
 
 const arrayProductos = []
