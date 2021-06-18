@@ -40,38 +40,33 @@ arrayProductos.forEach(producto => {
 
 
 
-//------------------------------------------------------------------------ F U N C I O N - C O M P R A R ---------------------------------------
 
 
-
-
-
-
-function agregarAlCarrito(evento){
 /*
-    let detalleProd = CARRITO.cart.find(objeto  => objeto.id == evento.target.id);
-    if (detalleProd != undefined) {
-        detalleProd.addCantidad();
-    } else {
-        let seleccionado = arrayProductos.find(producto => producto.id == evento.target.id);
-        CARRITO.cart.push(new Producto(seleccionado));
-    }
+$(".btn-producto").click(function agregarAlCarro(){
+    CARRITO.agregarAlCarrito()
+})
 */
+$(".btn-producto").click(CARRITO.agregarAlCarrito)
+/*
+function agregarAlCarrito(evento){
 
-
-    let detalleProd = arrayProductos.find(objeto  => objeto.id == evento.target.id);
+    //console.log(evento.target.name);
+    let detalleProd = arrayProductos.find(objeto  => objeto.id == evento.target.name);
     //console.log(detalleProd);
     console.log(`Agregaste ${detalleProd.tipo} al CARRITO`);
 
     //---SUMO PRECIO DE LOS PRODUCTOS
     let precioAgregado = precioTotal += detalleProd.precio;
-        console.log(`Total: $ ${precioAgregado}.`);
+    console.log(`Total: $ ${precioAgregado}.`);
+    console.log(precioAgregado);
 
-    CARRITO.cart.push(detalleProd);
-    //salida(CARRITO.cart, precioAgregado);
+    CARRITO.agregarItem(detalleProd)
 
     CARRITO.salida();
 
+
+    //----- ANIMACION DE AGREGADO AL CARRITO
     $(".agregado").show()
     $(".agregado").fadeIn(1000, function(){
         $(".agregado").fadeOut(3000);
@@ -81,7 +76,7 @@ function agregarAlCarrito(evento){
     badgeCarro (CARRITO.cart.length)
 
 }
-
+*/
 
 
 
@@ -90,7 +85,7 @@ function agregarAlCarrito(evento){
 
 
 function componenteBadge(string, clase) {
-    return `<span class="badge ${clase}">${string}</span>`;
+    return `<span class="badge ${clase} h6">${string}</span>`;
 }
 
 function getBadge(stock) {
@@ -102,12 +97,23 @@ function getBadge(stock) {
 }
 
 
+
+
+//--------------------------------------- M A R C A D O R - D E - U N I D A D E S - E N - E L - C A R R I T O -------------------------------------
+
+
+
+
+
 function badgeCarro (unidad) {
     if (unidad > 0) {
         return $("#test").append(`<span class="badge badge-pill badge-danger">${unidad}</span>`);
     }
     
 }
+
+
+
 
 //-------------------------------------------- l o c a l S t o r a g e --------------------------------------------------------------
 
@@ -136,16 +142,11 @@ if (readLocal("carrito") != null){
 
 
 
-$(".btn-finalizar").click(function () { 
+$(".btn-finalizar").click(function finalizar() { 
+
+    CARRITO.finalizarCompra()
     console.log("Compra Finalizada");
     alert("Compra Finalizada");
-
-
-
-    $.post("https://jsonplaceholder.typicode.com/posts",JSON.stringify(CARRITO.cart));
-    CARRITO.cart = []
-    localStorage.clear();
-    $("#carroCuerpo, #totalCarro").empty();
 });
 
 
@@ -155,8 +156,7 @@ $(".btn-finalizar").click(function () {
 
 
 $(".btn-vaciar").on("click", function vaciar() {
-    CARRITO.cart = []
-    $("#carroCuerpo, #totalCarro").empty();
-    localStorage.clear();
+
+    CARRITO.vaciarCart();
     console.log("Carrito vaciado");
-})
+});

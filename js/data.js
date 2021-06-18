@@ -4,7 +4,7 @@ const DATOS = [{
     "talle": "L",
     "precio": 855,
     "imagen": "imagenes/remeraBlanca.jpg",
-    "stock": 2,
+    "stock": 6,
     "cantidad": 1
 }, {
     "id": 2,

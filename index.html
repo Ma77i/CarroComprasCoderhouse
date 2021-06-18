@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyecto JS Coder</title>
+  <title>Tienda Oficial Led Zeppelin/Proyecto JS Coder</title>
+  <link rel="icon" type="image/jpg" href="imagenes/lzicon.jpg">
 
   <!--FONTAWSOME-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -59,7 +60,7 @@
           <img src="imagenes/logoW.png" alt="logo Zeppelin" width="47%">
         </a>
 
-        <p class="agregado display-6 alert alert-primary font-weight-bolder" role="alert">Agregado al Carrito</p>
+        <p class="agregado display-6 alert alert-secondary font-weight-bolder" role="alert">Agregado al Carrito</p>
         
         <!-- Button trigger modal -->
         <a data-toggle="modal" data-target="#exampleModal" type="button" id="test">
@@ -106,7 +107,6 @@
             
               <tr>
             
-                <th scope="col">#</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">Precio</th>
@@ -122,10 +122,10 @@
             
             <tr>
             
-              <th scope="col"></th>
+              
               <th scope="col">TOTAL</th>
               <th scope="col"></th>
-              <th scope="col" id="totalCarro"></th>
+              <th scope="col" id="totalCarro">$</th>
               
             </tr>
           </table>
@@ -134,7 +134,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark btn-finalizar" data-dismiss="modal">Comprar</button>
+          <button type="button" class="btn btn-outline-dark btn-finalizar" data-dismiss="modal">Finalizar Compra</button>
           <button type="button" class="btn btn-primary btn-vaciar">Vaciar carrito</button>
         </div>
       </div>

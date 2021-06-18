@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 
 
-    $(".btn-producto").click(agregarAlCarrito)
+    //$(".btn-producto").click(agregarAlCarrito)
 
 
 
@@ -50,50 +50,3 @@ $(document).ready(function () {
 
 
 })
-
-
-
-
-
-
-//--------------------------------------------- B U S Q U E D A S - P O R - I D ------------------------------------ 
-
-/*
-let idBusqueda = 4;
-let encontrado = DATOS.find(x => x.id === idBusqueda);
-console.log(encontrado);
-*/
-
-
-
-//---------------U S A R - M A P - P A R A - C R E A R - U N - A R R A Y - C O N - IDs - Y - N O M B R E S --------
-
-/*
-let selectData = DATOS.map(prod => {
-    return `${prod.tipo}, $${prod.precio}`
-});
-console.log(selectData);
-*/
-
-
-//----------------------------------S A L I D A - S O B R E - E L - S E L E C T - D A T A -----------------------------
-
-/*
-let lista = '';
-for (const dato of selectData) {
-    lista += dato.id +" "+dato.nombre+" \n";
-}
-console.log(lista);
-*/
-
-
-        //--------------------------------------------S U M A - D E - I V A-------------------------------------------------//vv
-/*
-function sumarElIVA() {
-    for (const producto of productos) {
-        producto.sumarIva()
-    }
-}
-
-*/
-
