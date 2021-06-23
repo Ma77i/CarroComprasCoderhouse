@@ -1,6 +1,9 @@
 
 
 //----------------------------------------------------- V A R I A B L E S ---------------------------------------------------
+
+let DATOS = []
+
 let arrayProductos = []
 
 const seccionProductos = document.getElementById("contenCard");
@@ -8,10 +11,6 @@ const seccionProductos = document.getElementById("contenCard");
 const PREFIJO = "productoId"
 
 let CARRITO = new CART;
-
-let DATOS = []
-
-
 
 
 
@@ -69,6 +68,7 @@ function readLocal(key) {
 if (readLocal("carrito") != null){
         CARRITO.cart.push.apply(CARRITO.cart, readLocal("carrito"));
         CARRITO.salidaCarrito(CARRITO.cart);
+        badgeCarro (CARRITO.cart.length);
     }
 
 
@@ -106,6 +106,6 @@ $(".btn-vaciar").on("click", function vaciar() {
 
 function botonOut(stock) {
     if (stock == 0){
-        $(".btn-producto").attr("disabled")
+        return $(".btn-producto").attr("disabled")
     }
 };

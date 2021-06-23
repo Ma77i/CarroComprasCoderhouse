@@ -29,6 +29,7 @@ table {
     top: 15%;
     right: 2%;
 }
+
 #imgPromo {
     z-index: 1;
     position: absolute;
@@ -55,4 +56,24 @@ table {
 .masMenos, .btn-remove:hover {
 
     cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 700px) {
+
+    .badge-pill {
+        z-index: 1;
+        position: absolute;
+        top: 15%;
+        right: 2%;
+    }
+
+    .agregado {
+        position: absolute!important;
+        top: 35%;
+        right: 0%;
+        /*display: none;*/
+        font-family: 'Kumbh Sans', sans-serif;
+    }
 }
