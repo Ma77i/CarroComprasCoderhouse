@@ -1,14 +1,7 @@
 
 
 //----------------------------------------------------- V A R I A B L E S ---------------------------------------------------
-
-
-
-
-
-
-
-
+let arrayProductos = []
 
 const seccionProductos = document.getElementById("contenCard");
 
@@ -16,37 +9,13 @@ const PREFIJO = "productoId"
 
 let CARRITO = new CART;
 
-
-//------------------------- ARRAYS DE PRODUCTOS PARA AGREGAR PRODUCTO NUEVO AL HTML ------------------------------------
-
+let DATOS = []
 
 
 
 
 
-for (const prod of DATOS) {
-    arrayProductos.push(new Producto(prod))
-}
-
-
-
-arrayProductos.forEach(producto => {
-
-    seccionProductos.appendChild(producto.crearElemento());
-
-})
-
-
-
-
-
-
-$(".btn-producto").click(e => CARRITO.agregarAlCarrito(e))
-
-
-
-
-//------------------------------------- F U N C I O N - P A R A - M O S T R A R - D I S P O N I B I L I D A D---------------------------------------------------------
+//------------------------------------- F U N C I O N - P A R A - M O S T R A R - D I S P O N I B I L I D A D ----------------------
 
 
 
@@ -71,10 +40,10 @@ function getBadge(stock) {
 
 
 
-function badgeCarro (unidad) {
+function badgeCarro(unidad) {
     $("#badgeCart").remove();
     if (unidad > 0) {
-        $("#test").append(`<span id="badgeCart" class="badge badge-pill badge-danger">${unidad}</span>`);
+        $("#test").prepend(`<span id="badgeCart" class="badge badge-pill badge-danger">${unidad}</span>`);
     }
     
 }
@@ -99,7 +68,7 @@ function readLocal(key) {
 
 if (readLocal("carrito") != null){
         CARRITO.cart.push.apply(CARRITO.cart, readLocal("carrito"));
-        CARRITO.salida(CARRITO.cart, readLocal("total"));
+        CARRITO.salidaCarrito(CARRITO.cart);
     }
 
 
@@ -127,3 +96,16 @@ $(".btn-vaciar").on("click", function vaciar() {
     CARRITO.vaciarCart();
     console.log("Carrito vaciado");
 });
+
+
+
+
+
+
+
+
+function botonOut(stock) {
+    if (stock == 0){
+        $(".btn-producto").attr("disabled")
+    }
+};
