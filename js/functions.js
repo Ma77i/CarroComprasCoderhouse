@@ -103,9 +103,11 @@ $(".btn-vaciar").on("click", function vaciar() {
 
 
 
-
+/*
 function botonOut(stock) {
     if (stock == 0){
-        return $(".btn-producto").attr("disabled")
+        $(".btn-producto").hide();
+    }else {
+        $(".btn-producto").show();
     }
-};
+};*/

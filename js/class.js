@@ -28,17 +28,25 @@ class Producto {
     }
 
 
-
+    botonOut() {
+        if (this.stock <= 0){
+            $(".btn-producto").show();
+        }else {
+            $(".btn-producto").hide();
+        }
+    }
 
 //--------METODO PARA CREAR DINAMICAMENTE UN NUEVO PRODUCTO EN EL HTML-------------------------------
     
 
 
     crearElemento() {
+
+
         let contenedor = document.createElement("div");
         contenedor.classList.add("col", "mb-2");
         contenedor.id = PREFIJO+this.id;
-        botonOut(this.stock);
+        this.botonOut();
         contenedor.innerHTML = `<div class="card border-3 rounded">
                                     <img src=${this.imagen} class="card-img-top" alt="...">
                                     <div class="card-body">
