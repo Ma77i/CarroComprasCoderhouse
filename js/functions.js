@@ -97,17 +97,3 @@ $(".btn-vaciar").on("click", function vaciar() {
     console.log("Carrito vaciado");
 });
 
-
-
-
-
-
-
-/*
-function botonOut(stock) {
-    if (stock == 0){
-        $(".btn-producto").hide();
-    }else {
-        $(".btn-producto").show();
-    }
-};*/

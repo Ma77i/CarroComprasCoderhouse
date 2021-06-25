@@ -1,11 +1,6 @@
 
 
 
-//----------------------------------------------------------------- D E C L A R A C I O N - D E - C L A S E S --------------------------
-
-
-
-
 
 //---------------------------------------------------------------------- C L A S E - P R O D U C T O -----------------------------------
 
@@ -18,21 +13,13 @@ class Producto {
         this.talle = talle;
         this.precio = parseFloat(precio);
         this.imagen = imagen
-        this.stock = stock
-        this.iva = 0.21;
+        this.stock = parseInt(stock)
     }
 
 
-    sumarIva() {
-        this.precio = this.precio + (this.precio * this.iva);
-    }
-
-
-    botonOut() {
-        if (this.stock <= 0){
-            $(".btn-producto").show();
-        }else {
-            $(".btn-producto").hide();
+    botonOut(stocker) {
+        if (stocker == 0){
+            $(".btn-producto").prop('disabled', true);
         }
     }
 
@@ -41,12 +28,12 @@ class Producto {
 
 
     crearElemento() {
-
-
+        
+        this.botonOut(this.stock);
         let contenedor = document.createElement("div");
         contenedor.classList.add("col", "mb-2");
         contenedor.id = PREFIJO+this.id;
-        this.botonOut();
+        
         contenedor.innerHTML = `<div class="card border-3 rounded">
                                     <img src=${this.imagen} class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -73,8 +60,11 @@ class Producto {
 class CART {
     constructor(){
     this.cart = [];
-    this.total = this.getTotal()
+    this.total = this.getTotal();
+    this.iva = 0.21;
     }
+
+
 
 //------------------------------------------------------------------------ M E T O D O - A G R E G A R - A L - C A R R I T O -----------------
     
@@ -118,7 +108,7 @@ class CART {
 
     salidaCarrito(){
 
-    let totalSalida = this.getTotal()
+    let totalSalida = this.getTotal();
 
     $("#carroCuerpo").empty();
     
@@ -149,15 +139,15 @@ class CART {
     }
 
 
-
-
+    sumarIva() {
+        this.precio = this.precio + (this.precio * this.iva);
+    }
 
 //------------------------------------------------------------------- O B T E N E R - T O T A L ----------------------------------------
 
-
-
     getTotal(){
-        this.total = this.cart.reduce((p, i) => i.cantidad * i.precio + p, 0)
+        
+        this.total = this.cart.reduce((p, i) => i.cantidad * i.precio + p, 0) 
         return this.total
     }
 
