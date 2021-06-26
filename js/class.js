@@ -17,22 +17,22 @@ class Producto {
     }
 
 
-    botonOut(stocker) {
-        if (stocker == 0){
-            $(".btn-producto").prop('disabled', true);
-        }
+    botonOut() {
+
+        $("#btn-card" + this.id).prop('disabled', this.stock <= 0);
+
     }
 
-//--------METODO PARA CREAR DINAMICAMENTE UN NUEVO PRODUCTO EN EL HTML-------------------------------
+
+
+//-----------------------------------------------METODO PARA CREAR DINAMICAMENTE UN NUEVO PRODUCTO EN EL HTML-------------------------------
     
 
 
     crearElemento() {
         
-        this.botonOut(this.stock);
         let contenedor = document.createElement("div");
         contenedor.classList.add("col", "mb-2");
-        contenedor.id = PREFIJO+this.id;
         
         contenedor.innerHTML = `<div class="card border-3 rounded">
                                     <img src=${this.imagen} class="card-img-top" alt="...">
@@ -52,36 +52,34 @@ class Producto {
 
 
 
-
-
+//---------------------------------------------------------------- C L A S E - C A R T --------------------
 
 
 
 class CART {
     constructor(){
-    this.cart = [];
-    this.total = this.getTotal();
-    this.iva = 0.21;
+        this.cart = [];
+        this.total = this.getTotal();
+        this.iva = 0.21;
     }
 
-
-
-//------------------------------------------------------------------------ M E T O D O - A G R E G A R - A L - C A R R I T O -----------------
+//------------------------------------------------ M E T O D O - A G R E G A R - A L - C A R R I T O -----------------
     
     agregarAlCarrito(e){
         e.preventDefault();
         var detalleProd = arrayProductos.find(objeto  => objeto.id == e.target.name);
-        //console.log(`Agregaste ${detalleProd.tipo} al CARRITO`);
         !this.cart.find(i => i.id == detalleProd.id) && this.cart.push({...detalleProd, cantidad: 0});
         
         this.agregarCantidad(detalleProd.id);
     
         //----- ANIMACION DE AGREGADO AL CARRITO
-        $(".agregado").show()
-        $(".agregado").fadeIn(1000, function(){
-            $(".agregado").fadeOut(2000);
-        });
-        
+            $(".agregado")
+                .empty().append(detalleProd.stock > 0 ? "agregado al Carrito" : "Producto Agotado")
+                .show().fadeIn(1000, () => {
+                    $(".agregado").fadeOut(2000);
+                });
+
+
         badgeCarro(this.cart.length);
         
         
@@ -89,7 +87,8 @@ class CART {
     }
 
 
-//----------------------------------------------------------------------- A G R E G A R - O - R E S T A R - C A N T I D A D -------------------
+//----------------------------------------------- A G R E G A R - O - R E S T A R - C A N T I D A D -------------------
+
     agregarCantidad(id, q = 1) {
         
         let index = this.cart.findIndex(i => i.id == id)
@@ -103,7 +102,7 @@ class CART {
 
 
 
-//--------------------------------------------------------------------------------- S A L I D A - C A R R I T O --------------------------- 
+//------------------------------------------------------------- S A L I D A - C A R R I T O --------------------------- 
     
 
     salidaCarrito(){
@@ -112,6 +111,14 @@ class CART {
 
     $("#carroCuerpo").empty();
     
+    if (this.cart.lenght <= 0){
+
+        $("#carroCuerpo").append("<tr class='celda'><td>Carrito vacio</td></tr>")
+    }else{
+
+    
+
+
     for (const produ of this.cart) {
 
         $("#carroCuerpo").append(`<tr class="celda">
@@ -132,6 +139,7 @@ class CART {
                                     </td>
                                 </tr>`);
     }
+    }
 
     $("#totalCarro").html(`$ ${totalSalida}`);
 
@@ -143,7 +151,7 @@ class CART {
         this.precio = this.precio + (this.precio * this.iva);
     }
 
-//------------------------------------------------------------------- O B T E N E R - T O T A L ----------------------------------------
+//------------------------------------------------------------------- O B T E N E R - T O T A L -----------------
 
     getTotal(){
         
@@ -152,7 +160,7 @@ class CART {
     }
 
 
-//----------------------------------------------------------------------------------------- V A C I A R - C A R R I T O ---------------------------
+//----------------------------------------------------------------------- V A C I A R - C A R R I T O ---------------
     vaciarCart() {
         this.cart.length = 0
         localStorage.removeItem("carrito");
@@ -162,7 +170,7 @@ class CART {
 
 
 
-//------------------------------------------------------------------------------- R E M O V E R - I T E M --------------------------------------
+//-------------------------------------------------------------------------- R E M O V E R - I T E M -------------------
     removerElemento(id) {
     
         this.cart = this.cart.filter(item => item.id != id);
@@ -171,9 +179,7 @@ class CART {
         this.salidaCarrito();
     }
 
-    //------------------------------------------------------------------------ F I N A L I Z A R - C O M P R A ------------------------------
-
-
+//------------------------------------------------------------------ F I N A L I Z A R - C O M P R A ------------------
 
     finalizarCompra() {
         $.post("https://jsonplaceholder.typicode.com/posts",JSON.stringify(this.cart));
@@ -182,5 +188,6 @@ class CART {
         
         badgeCarro (this.cart.length)
         $("#carroCuerpo, #totalCarro").empty();
+        console.log("Compra Finalizada");
     }
 }

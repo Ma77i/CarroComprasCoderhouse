@@ -1,6 +1,6 @@
 
 
-//----------------------------------------------------- V A R I A B L E S ---------------------------------------------------
+//------------------------------------------------------------------------------------ V A R I A B L E S ---------------------
 
 let DATOS = []
 
@@ -8,13 +8,11 @@ let arrayProductos = []
 
 const seccionProductos = document.getElementById("contenCard");
 
-const PREFIJO = "productoId"
-
 let CARRITO = new CART;
 
 
 
-//------------------------------------- F U N C I O N - P A R A - M O S T R A R - D I S P O N I B I L I D A D ----------------------
+//--------------------------------------------------- F U N C I O N - P A R A - M O S T R A R - D I S P O N I B I L I D A D -----------
 
 
 
@@ -33,7 +31,7 @@ function getBadge(stock) {
 
 
 
-//--------------------------------------- M A R C A D O R - D E - U N I D A D E S - E N - E L - C A R R I T O -------------------------------------
+//----------------------------------------------------- M A R C A D O R - D E - U N I D A D E S - E N - E L - C A R R I T O ----------------
 
 
 
@@ -50,7 +48,7 @@ function badgeCarro(unidad) {
 
 
 
-//-------------------------------------------- l o c a l S t o r a g e --------------------------------------------------------------
+//--------------------------------------------------------------------------------- l o c a l S t o r a g e -----------------
 
 function saveJsonToLocal(key, data){
 
@@ -74,21 +72,18 @@ if (readLocal("carrito") != null){
 
 
 
-//------------------------------------------------- F I N A L I Z A R  C O M P R A ---------------------------------------------------
+//------------------------------------------------------------------------------------ F I N A L I Z A R  C O M P R A -----------------
 
 
 
 $(".btn-finalizar").click(function finalizar() { 
 
     CARRITO.finalizarCompra()
-    console.log("Compra Finalizada");
-    alert("Compra Finalizada");
+
 });
 
 
-
-
-//---------------------------------------------- V A C I A R - C A R R O ---------------------------------------------------
+//------------------------------------------------------------------------------------ V A C I A R - C A R R O -----------------
 
 
 $(".btn-vaciar").on("click", function vaciar() {
@@ -97,3 +92,8 @@ $(".btn-vaciar").on("click", function vaciar() {
     console.log("Carrito vaciado");
 });
 
+
+/*
+let variable = Condicion ? verdadero : falso
+TERNARIO
+*/

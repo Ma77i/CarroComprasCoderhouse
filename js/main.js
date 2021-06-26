@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     
 
-    $.getJSON("js/data.json", (respuesta, data) => {
+    $.getJSON("js/data.JSON", (respuesta, data) => {
         if (data === "success") {
             DATOS = respuesta;
             
@@ -18,15 +18,26 @@ $(document).ready(function () {
             arrayProductos.forEach(producto => {
 
                 seccionProductos.appendChild(producto.crearElemento());
+
+                producto.botonOut();
             
-            })
+            });
+
+            
 
 
 
             //------------------------------------- D E T E C T O - E V E N T O - P A R A - A G R E G A R - A L - C A R R I T O --------
-            $(".btn-producto").click(e => CARRITO.agregarAlCarrito(e))
+            $(".btn-producto").click(e => {
+                CARRITO.agregarAlCarrito(e)
+                
+            
+            });
             
         }
+
+        
+
     });
 
 
