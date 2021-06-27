@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     
 
-    $.getJSON("js/data.JSON", (respuesta, data) => {
+    $.getJSON("js/data.json", (respuesta, data) => {
         if (data === "success") {
             DATOS = respuesta;
             
