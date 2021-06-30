@@ -32,55 +32,41 @@
 
 <body>
 
-  <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light m-0 px-2 py-0" >
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light m-0 px-2 py-0">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-item nav-link active" href="#">Ropa</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link disabled" href="#">Accesorios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link disabled" href="#">Discos</a>
+        </li>
+      </ul>
+    </div>
+
     
+      <a class="navbar-brand mx-auto pl-5" href="index.html">
+        <img class="brandImg" src="imagenes/logoW.png" alt="logo Zeppelin">
+      </a>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" 
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-
-      <div class="collapse navbar-collapse flex-grow-0" id="navbarTogglerDemo01">
-
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="#">Ropa</a>
-
-            <a class="nav-item nav-link" href="#">Accesorios</a>
-
-            <a class="nav-item nav-link" href="#">Discos</a>
-        </div>
-      </div>
-
-
-
-      <div class="container-fluid">
-        <a class="navbar-brand mx-auto pl-5" href="index.html">
-          <img src="imagenes/logoW.png" alt="logo Zeppelin" width="47%">
-        </a>
-
-        <p class="agregado display-6 alert alert-secondary font-weight-bolder" role="alert"></p>
-        
-        <!-- Button trigger modal -->
-        <a data-toggle="modal" data-target="#exampleModal" type="button" id="test">
-          
-          <i class="fas fa-shopping-cart fa-2x"></i>
-        </a>
-      </div>
-
+      <p class="agregado display-6 alert alert-secondary font-weight-bolder" role="alert"></p>
+      
+      <!-- Button trigger modal -->
+      <a data-toggle="modal" data-target="#exampleModal" type="button" id="test">
+        <i class="fas fa-shopping-cart fa-2x"></i>
+      </a>
     
   </nav>
 
-
-
-  <div id="imgPromo" class="container-fluid m-auto">
-    <div class="imgBook">
-      <img class="imgBook__image" src="imagenes/lzbook.jpg" alt="Libro led Zeppelin" width="80%" height="80%">
-    </div>
-  </div>
-
-
-
+  <div id="compraFinalizada"></div>
 
 
   <!-- Modal -->
@@ -97,39 +83,8 @@
           </button>
         </div>
 
-        <div class="modal-body">
-
-
-          <table id="carroCompras" class="table table-sm table-striped table-bordered table-hover table-light">
-            
-            <thead class="thead-dark">
-            
-              <tr>
-            
-                <th scope="col">Tipo</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Talle</th>
-            
-                <th scope="col">Remover</th>
-            
-              </tr>
-            </thead>
-
-            <tbody id="carroCuerpo">
-            </tbody>
-            
-            <tr>
-            
-              
-              <th scope="col">TOTAL</th>
-              <th scope="col"></th>
-              <th scope="col" id="totalCarro">$</th>
-              
-            </tr>
-          </table>
-
-
+        <div class="modal-body" id="tablaCarro">
+          <img src="imagenes/Carro_Vacio.png" class="rounded mx-auto d-block" alt="carro vacio" width="50%">
         </div>
 
         <div class="modal-footer">
@@ -175,7 +130,6 @@
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
   </script>
 
-  <!--<script src="js/jquery-3.6.0.min.js" defer></script>-->
   <script src="js/class.js" defer></script>
   <script src="js/functions.js" defer></script>
   <script src="js/main.js" defer></script>

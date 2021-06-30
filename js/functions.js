@@ -10,16 +10,12 @@ const seccionProductos = document.getElementById("contenCard");
 
 let CARRITO = new CART;
 
-
-
-//--------------------------------------------------- F U N C I O N - P A R A - M O S T R A R - D I S P O N I B I L I D A D -----------
-
-
-
+//------------------------------------------------------------- B A D G E - D I S P O N I B L E - O - A G O T A D O -----
+//--Funcion para mostrar badge de disponible o agotado
 function componenteBadge(string, clase) {
     return `<span class="badge ${clase} h6">${string}</span>`;
 }
-
+//--Agrego una funcion para crear badges de Disponible o Agotado segun el stock del producto
 function getBadge(stock) {
     if (stock > 0) {
         return componenteBadge('Disponible', 'badge-info')
@@ -28,15 +24,8 @@ function getBadge(stock) {
     }
 }
 
-
-
-
-//----------------------------------------------------- M A R C A D O R - D E - U N I D A D E S - E N - E L - C A R R I T O ----------------
-
-
-
-
-
+//------------------------------------------------------------------B A D G E - U N I D A D E S ---------------
+//--Agrego un badge contador de productos en el carrito 
 function badgeCarro(unidad) {
     $("#badgeCart").remove();
     if (unidad > 0) {
@@ -45,55 +34,28 @@ function badgeCarro(unidad) {
     
 }
 
-
-
-
-//--------------------------------------------------------------------------------- l o c a l S t o r a g e -----------------
-
+//------------------------------------------------------------------- l o c a l S t o r a g e -----------------
+//-- Funcion para guardar en localStorage los datos del carrito
 function saveJsonToLocal(key, data){
 
     localStorage.setItem(key, JSON.stringify(data));
+
 }
 
 
-
+//-- Funcion para leer los datos del localStorage parseandolos
 function readLocal(key) {
+
     return JSON.parse(localStorage.getItem(key));
+
 }
 
 
-
+//-- Condicional para mostrar los datos guardados una vez se actualice el navegador 
 if (readLocal("carrito") != null){
+
         CARRITO.cart.push.apply(CARRITO.cart, readLocal("carrito"));
         CARRITO.salidaCarrito(CARRITO.cart);
         badgeCarro (CARRITO.cart.length);
+
     }
-
-
-
-
-//------------------------------------------------------------------------------------ F I N A L I Z A R  C O M P R A -----------------
-
-
-
-$(".btn-finalizar").click(function finalizar() { 
-
-    CARRITO.finalizarCompra()
-
-});
-
-
-//------------------------------------------------------------------------------------ V A C I A R - C A R R O -----------------
-
-
-$(".btn-vaciar").on("click", function vaciar() {
-
-    CARRITO.vaciarCart();
-    console.log("Carrito vaciado");
-});
-
-
-/*
-let variable = Condicion ? verdadero : falso
-TERNARIO
-*/

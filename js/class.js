@@ -7,33 +7,26 @@
 
 
 class Producto {
-    constructor({id, tipo, talle, precio, imagen, stock}) {
+    constructor({id, tipo, precio, imagen, stock}) {
         this.id = parseInt(id);
         this.tipo = tipo;
-        this.talle = talle;
         this.precio = parseFloat(precio);
         this.imagen = imagen
         this.stock = parseInt(stock)
     }
 
-
+    //-- Metodo para deshabilitar boton de Agregar al Carrito en productos con stock 0
     botonOut() {
 
         $("#btn-card" + this.id).prop('disabled', this.stock <= 0);
 
     }
 
-
-
-//-----------------------------------------------METODO PARA CREAR DINAMICAMENTE UN NUEVO PRODUCTO EN EL HTML-------------------------------
-    
-
-
+    //-- Creo contenedores de las cards para mostrar productos en el DOM
     crearElemento() {
         
         let contenedor = document.createElement("div");
         contenedor.classList.add("col", "mb-2");
-        
         contenedor.innerHTML = `<div class="card border-3 rounded">
                                     <img src=${this.imagen} class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -42,152 +35,140 @@ class Producto {
                                         <button name=${this.id} id="btn-card${this.id}" class="btn btn-primary btn-producto"> Agregar al Carrito </button>
                                     </div>
                                 </div>`;
-        
         return contenedor
         
     }
-
 };
 
-
-
-
-//---------------------------------------------------------------- C L A S E - C A R T --------------------
-
-
+//---------------------------------------------------------------- C L A S E - C A R T --------
 
 class CART {
     constructor(){
         this.cart = [];
         this.total = this.getTotal();
-        this.iva = 0.21;
     }
 
-//------------------------------------------------ M E T O D O - A G R E G A R - A L - C A R R I T O -----------------
-    
+    //-- Metodo para agregar productos al Carrito
     agregarAlCarrito(e){
         e.preventDefault();
+        //-- Detecto el producto por su id y si no existe en el CARRITO lo envio, sino le agrego cantidad
         var detalleProd = arrayProductos.find(objeto  => objeto.id == e.target.name);
         !this.cart.find(i => i.id == detalleProd.id) && this.cart.push({...detalleProd, cantidad: 0});
-        
         this.agregarCantidad(detalleProd.id);
     
         //----- ANIMACION DE AGREGADO AL CARRITO
             $(".agregado")
-                .empty().append(detalleProd.stock > 0 ? "agregado al Carrito" : "Producto Agotado")
+                .empty().append(detalleProd.stock > 0 ? "Agregado al Carrito" : "Producto Agotado")
                 .show().fadeIn(1000, () => {
                     $(".agregado").fadeOut(2000);
                 });
-
-
+        //-- Badge contador de unidades
         badgeCarro(this.cart.length);
         
-        
-    
     }
 
-
-//----------------------------------------------- A G R E G A R - O - R E S T A R - C A N T I D A D -------------------
-
+    //-- Metodo para agregar o restar cantidad de productos en el carrito
     agregarCantidad(id, q = 1) {
         
-        let index = this.cart.findIndex(i => i.id == id)
+        let index = this.cart.findIndex(i => i.id == id);
         this.cart[index].cantidad += q;
         this.cart[index].cantidad = this.cart[index].cantidad <= 0 ? 0 : this.cart[index].cantidad > this.cart[index].stock ? this.cart[index].stock : this.cart[index].cantidad;
-        
         this.cart[index].cantidad <= 0 && this.removerElemento(this.cart[index].id);
-
         this.salidaCarrito();
+
     }
 
-
-
-//------------------------------------------------------------- S A L I D A - C A R R I T O --------------------------- 
-    
-
+    //-- Salida al html del carrito por un modal donde muestro propiedades del producto
     salidaCarrito(){
+        
+        if (this.cart.length > 0) {
+            $("#tablaCarro").empty()
+            $("#tablaCarro").html(`<table id="carroCompras" class="table table-sm table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Producto</th>
+                                                <th scope="col" class="mx-auto">Cantidad</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Quitar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="carroCuerpo"></tbody>
+                                        <thead>
+                                            <tr>                    
+                                                <th scope="col" colspan="2">TOTAL</th>
+                                                <th scope="col" colspan="3" id="totalCarro"></th>
+                                            </tr>
+                                        </thead>
+                                    </table>`)
 
-    let totalSalida = this.getTotal();
+            //-- for of para recorrer las propiedades del producto
+            for (const produ of this.cart) {
 
-    $("#carroCuerpo").empty();
-    
-    if (this.cart.lenght <= 0){
-
-        $("#carroCuerpo").append("<tr class='celda'><td>Carrito vacio</td></tr>")
-    }else{
-
-    
-
-
-    for (const produ of this.cart) {
-
-        $("#carroCuerpo").append(`<tr class="celda">
-                                    <td>${produ.tipo}</td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                            <button type="button" class="masMenos btn btn-secondary" onclick="CARRITO.agregarCantidad(${produ.id}, -1)"> - </button>
-                                            <button type="button" class="btn btn-secondary" disabled>${produ.cantidad}</button>
-                                            <button type="button" class="masMenos btn btn-secondary" onclick="CARRITO.agregarCantidad(${produ.id}, 1)"> + </button>
-                                        </div>
-                                    </td>
-                                    <td>$ ${produ.precio}</td>
-                                    <td>${produ.talle}</td>
-                                    <td>
-                                        <a class="btn-remove" onclick="CARRITO.removerElemento(${produ.id})">
-                                            <i id=${produ.id} class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>`);
+                $("#carroCuerpo").append(`<tr class="celda">
+                                            <td class="align-middle">
+                                                <img src="${produ.imagen}" class="align-self-start mr-3" alt="..." width="25%">${produ.tipo}
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                                    <button type="button" class="masMenos btn btn-light" onclick="CARRITO.agregarCantidad(${produ.id}, -1)"> - </button>
+                                                    <button type="button" class="btn btn-light" disabled>${produ.cantidad}</button>
+                                                    <button type="button" class="masMenos btn btn-light" onclick="CARRITO.agregarCantidad(${produ.id}, 1)"> + </button>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                $ ${produ.precio}
+                                            </td>
+                                            <td class="align-middle">
+                                                <a class="btn-remove btn-light m-auto" onclick="CARRITO.removerElemento(${produ.id})"><i id=${produ.id} class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>`);
+            }
+            //-- Declaro la variable para obtener el total de productos agregados al carrito
+            let totalSalida = this.getTotal();
+            //-- Muestro el total de productos agregados al carrito
+            $("#totalCarro").html(`$ ${totalSalida}`);
+            //--Guardo los datos del carrito en el localStorage
+            saveJsonToLocal("carrito", this.cart)
+        }
     }
-    }
 
-    $("#totalCarro").html(`$ ${totalSalida}`);
-
-    saveJsonToLocal("carrito", this.cart)
-    }
-
-
-    sumarIva() {
-        this.precio = this.precio + (this.precio * this.iva);
-    }
-
-//------------------------------------------------------------------- O B T E N E R - T O T A L -----------------
-
+    //-- Metodo para obtener el monto total de los productos del carrito
     getTotal(){
         
         this.total = this.cart.reduce((p, i) => i.cantidad * i.precio + p, 0) 
         return this.total
+
     }
 
-
-//----------------------------------------------------------------------- V A C I A R - C A R R I T O ---------------
-    vaciarCart() {
-        this.cart.length = 0
-        localStorage.removeItem("carrito");
-        $("#carroCuerpo, #totalCarro").empty();
-        badgeCarro (this.cart.length);
-    }
-
-
-
-//-------------------------------------------------------------------------- R E M O V E R - I T E M -------------------
+    //--Metodo para remover un item del carrito de compras 
     removerElemento(id) {
     
         this.cart = this.cart.filter(item => item.id != id);
-        this.cart.length == 0 && this.vaciarCart()
-        badgeCarro(this.cart.length)
+        this.cart.length == 0 && this.vaciarCart();
+        badgeCarro(this.cart.length);
         this.salidaCarrito();
+
     }
 
-//------------------------------------------------------------------ F I N A L I Z A R - C O M P R A ------------------
+    //-- Metodo para vaciar el carrito y borrar el contador de unidades
+    vaciarCart() {
 
+        this.cart.length = 0
+        localStorage.removeItem("carrito");
+        $("#tablaCarro").html('<img src="imagenes/Carro_Vacio.png" class="rounded mx-auto d-block" alt="carro vacio" width="50%">');
+        badgeCarro (this.cart.length);
+        console.log("Carrito vaciado");
+
+    }
+
+    //-- Metodo para finalizar compra y vaciar carrito
     finalizarCompra() {
+
         $.post("https://jsonplaceholder.typicode.com/posts",JSON.stringify(this.cart));
-    
-        this.vaciarCart()
-        
-        badgeCarro (this.cart.length)
-        $("#carroCuerpo, #totalCarro").empty();
+        this.vaciarCart();
+        badgeCarro (this.cart.length);
+        $("#compraFinalizada").html('<div class="alert alert-success" role="alert">Compra Finalizada</a></div>').fadeOut(4000);
         console.log("Compra Finalizada");
+        
     }
 }
